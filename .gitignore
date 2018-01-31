@@ -1,0 +1,16 @@
+/*.log
+/target
+/*-init.clj
+/resources/public/js/compiled
+.idea
+out
+node_modules/
+resources/public/js/bundle.js
+resources/public/js/compiled
+resources/public/kundel.html
+.tags
+.tags1
+.lein-failures
+.nrepl-port
+kundel.iml
+resources/public/bundle.to.pack.js
