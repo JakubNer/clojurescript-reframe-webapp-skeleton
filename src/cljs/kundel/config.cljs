@@ -1,4 +1,5 @@
-(ns kundel.config)
+(ns kundel.config
+  (:require [re-frame.core :as rf]))
 
 (def debug?
   ^boolean js/goog.DEBUG)
