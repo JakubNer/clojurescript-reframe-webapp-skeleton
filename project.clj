@@ -19,10 +19,12 @@
 
   :profiles
   {:dev
-   {:dependencies [[binaryage/devtools "0.9.9"]
-                   [com.cemerick/piggieback "0.2.1"]
-                   [figwheel-sidecar "0.5.14"]]
-    :plugins      [[lein-figwheel "0.5.14"]]}}
+   {:repl-options {:nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]}
+    :dependencies [[binaryage/devtools "0.9.9"]
+                   [com.cemerick/piggieback "0.2.2"]
+                   [figwheel-sidecar "0.5.15"]
+                   [org.clojure/tools.nrepl "0.2.13"]]
+    :plugins      [[lein-figwheel "0.5.15"]]}}
 
   :cljsbuild {:test-commands {; Test command for running the unit tests in "test-cljs" (see below).
                               ;     $ lein cljsbuild test
