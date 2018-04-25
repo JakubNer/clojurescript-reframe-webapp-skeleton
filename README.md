@@ -5,7 +5,43 @@
 * hooked in media-queries
 * packs everything using inliner
 
+## Quick Start
+
+```
+lein clean
+npm install
+npm run build
+lein figwheel dev
+```
+
 ## Development Mode
+
+### Bring in NPM dependency
+
+* (optionally) amend `package.json`
+* change `resources\public\js\webpack\main.js`
+* change `resources\extern.js`
+
+Download NPM dependencies:
+
+```
+npm install
+```
+
+### Rebuild LESS
+
+Less file is in `src\less\main.less`
+
+Dependencies loaded through `resources\public\js\webpack\main.js`
+
+All built into `resources\public\js\bundle.js`
+
+Rebuild bundle with:
+
+```
+npm run build
+npm run watch
+```
 
 ### Dev Run Application:
 
@@ -17,29 +53,6 @@ lein figwheel dev
 Figwheel will automatically push cljs changes to the browser.
 
 Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
-
-### Bring in new NPM dependency
-
-* change `package.json`
-* run `npm install` to bring in new package
-* change `js/main.js`
-
-### Rebuild LESS
-
-Less file is in `src\less\main.less`
-
-Dependencies loaded through `src\js\main.js`
-
-All built into `resources\public\js\bundle.js`
-
-Rebuild bundle with:
-
-```
-npm run build
-npm run watch
-```
-
-To add NPM modules, modify package.json and `npm install`.
 
 ## Run tests
 
@@ -54,7 +67,6 @@ Can append test command to run: one from `project.clj` `:test-commands`
 
 ## Production Build
 
-
 To compile clojurescript to javascript:
 
 ```
@@ -64,7 +76,9 @@ lein cljsbuild once min
 ./pack.ps1
 ```
 
-Find output in `resources/public/kundel.html`.
+The `./pack.ps1` step requires *PowerShell* (Windows) and the NPM *inliner* module (see section below).
+
+Once the *inliner* runs find output as single-file in `resources/public/kundel.html`.
 
 ## Inline HTML
 
@@ -81,20 +95,9 @@ inliner -m resources\public\index.html > resources\public\kundel.html
 inliner -m resources\public\index.html | Out-file -Encoding ASCII "resources\public\kundel.html"
 ```
 
-## Licenses
+## REPL Examples (Debugging)
 
-
-## REPL Reload Events (Example)
-
-```
-(in-ns 'kundel.core)
-(:require '[kundel.events]
-          '[re-frame.core :as rf]  :reload))
-```
-
-Above `:mock-db` is a new event added in kundel.events that we want to take effect
-
-## Connect to REPL (command-line) from IntelliJ/Cursive
+### Connect to REPL (command-line) from IntelliJ/Cursive
 
 Our 'project.clj' sets up figwheel :nrepl-port to 7002.
 
@@ -107,7 +110,17 @@ Once started paste the following in the IntelliJ REPL (Alt-8)
 (cljs-repl)
 ```
 
-## REPL Run Single Test
+### REPL Reload Events (Example)
+
+```
+(in-ns 'kundel.core)
+(:require '[kundel.events]
+          '[re-frame.core :as rf]  :reload))
+```
+
+Above `:mock-db` is a new event added in kundel.events that we want to take effect
+
+### REPL Run Single Test
 
 Start 'dev' profile with figwheel:
 
@@ -127,7 +140,7 @@ Run one test from 'kundel.test' namespace:
 
 To run all tests, just (run-tests)
 
-## REPL Debug Trace a Method
+### REPL Debug Trace a Method
 
 Start 'dev' profile with figwheel:
 
@@ -188,4 +201,3 @@ And:
 ```
 (reset! db/app-db (assoc-in @db/app-db [..] ..))
 ```
-
